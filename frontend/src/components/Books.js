@@ -13,6 +13,9 @@ const Books = (props) => {
     return <div>loading...</div>;
   }
   const books = result.data.allBooks; // Changed `books` to `allBooks`.
+  /* The author `name` field is part of the `author` object.
+  The `author` object is a field in the `allBooks` object. Edit line 33 to get
+  the author's name. */
 
   return (
     <div>
@@ -27,7 +30,7 @@ const Books = (props) => {
           {books.map((a) => (
             <tr key={a.title}>
               <td>{a.title}</td>
-              <td>{a.author}</td>
+              <td>{a.author.name}</td>
               <td>{a.published}</td>
             </tr>
           ))}
