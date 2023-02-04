@@ -23,7 +23,21 @@ const NewBook = (props) => {
   const submit = (event) => {
     event.preventDefault();
 
-    addBook({ variables: { title, author, published, genres } });
+    /* If the user does not enter a number in the `published` input field,
+    the `onChange` function is not called and the `published` value remains
+    an empty string. This causes an error: `Variable "$published" got invalid
+    value ""; Int cannot represent non-integer value: ""`. Using parseInt()
+    on the `published` value empty string results in NaN. To fix this Number()
+    is passed the `published` value which changes the empty string to
+    the integer 0. */
+    addBook({
+      variables: {
+        title,
+        author,
+        published: Number(published),
+        genres
+      }
+    });
     console.log("add book...");
 
     setTitle("");
@@ -60,7 +74,7 @@ const NewBook = (props) => {
           <input
             type="number"
             value={published}
-            onChange={({ target }) => setPublished(parseInt(target.value))}
+            onChange={({ target }) => setPublished(target.value)}
           />
         </div>
         <div>

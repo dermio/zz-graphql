@@ -44,7 +44,7 @@ const Authors = (props) => {
         </tbody>
       </table>
 
-      <AuthorYearForm setError={notify} />
+      <AuthorYearForm setError={notify} token={props.token} />
       <Notify errorMessage={errorMessage} />
     </div>
   );

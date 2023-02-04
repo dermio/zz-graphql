@@ -28,6 +28,10 @@ const AuthorYearForm = (props) => {
     dependencies are added to the array to remove the ESLint warnings. */
   }, [name, result.data.allAuthors]);
 
+  if (!props.token) {
+    return null;
+  }
+
   if (result.loading) {
     return <div>loading...</div>;
   }
