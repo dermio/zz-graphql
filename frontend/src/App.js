@@ -4,6 +4,7 @@ import { useApolloClient } from "@apollo/client";
 import Authors from "./components/Authors";
 import Books from "./components/Books";
 import NewBook from "./components/NewBook";
+import Recommend from "./components/Recommend";
 import LoginForm from "./components/LoginForm";
 
 const App = () => {
@@ -41,8 +42,9 @@ const App = () => {
 
     /* After logging out, if on the `Authors` page, stay on the `Authors` page
     but hide the `AuthorYearForm`. If on the `Books` page, stay on the `Books`
-    page. If on the add `NewBook` page, show the default `Authors` page. */
-    if (page === "add") {
+    page. If on the add `NewBook` or `Recommend` page, show the default
+    `Authors` page. */
+    if (page === "add" || page === "recommend") {
       setPage("authors");
     }
   };
@@ -55,6 +57,7 @@ const App = () => {
         {token ? (
           <>
             <button onClick={() => setPage("add")}>add book</button>
+            <button onClick={() => setPage("recommend")}>recommend</button>
             <button onClick={logout}>logout</button>
           </>
         ) : (
@@ -68,6 +71,8 @@ const App = () => {
       <Books show={page === "books"} />
 
       <NewBook show={page === "add"} setError={notify} />
+
+      <Recommend show={page === "recommend"} />
 
       <LoginForm
         setToken={setToken}
